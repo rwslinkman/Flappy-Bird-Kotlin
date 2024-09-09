@@ -15,9 +15,10 @@ class Bird(private val image: Image, val x: Int, var y: Int): Renderable {
     }
 
     fun hasCollisionWith(pipe: PipeRow): Boolean {
+        val birdRect = Rectangle(this.x, this.y, BIRD_WIDTH, BIRD_HEIGHT)
         val topRect = Rectangle(pipe.x, pipe.y, pipe.width, pipe.height)
         val bottomRect = Rectangle(pipe.x, pipe.bottomY, pipe.width, pipe.height)
-        return topRect.contains(this.x, this.y) || bottomRect.contains(this.x, this.y)
+        return birdRect.intersects(topRect) || birdRect.intersects(bottomRect)
     }
 
     companion object {
